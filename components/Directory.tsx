@@ -1,8 +1,9 @@
-import { css } from "@emotion/css";
 import { useEffect, useState } from "react";
+import { css } from '@emotion/css'
 import FileTree from "./FileTree";
 import type { FileTree as FileTreeType } from "../models/fileTree";
 import { useSelectedContext } from "./SelectedContext";
+import { DirectoryIcon, TriangleDown, TriangleRight } from "../icons";
 
 export type DirectoryProps = {
   name: string;
@@ -59,17 +60,9 @@ const Directory: React.FC<DirectoryProps> = ({
           style={{ paddingLeft: `${level * 8}px` }}
           className={classes.directoryName}
         >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 15 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M6 11L6 4L10.5 7.5L6 11Z" fill="#6B7884"></path>
-          </svg>
+          {showChildren ? <TriangleDown /> : <TriangleRight />}
           <span className={classes.directoryWrapper}>
-            {directoryIcon}
+            <DirectoryIcon />
             {name}
           </span>
         </span>
@@ -89,12 +82,6 @@ const Directory: React.FC<DirectoryProps> = ({
 };
 
 const classes = {
-  icon: css`
-    width: 20px;
-    height: 20px;
-    color: #a4b2bf;
-  `,
-
   indentation: css`
     margin-left: 2rem;
   `,
@@ -110,7 +97,6 @@ const classes = {
 
     &:hover {
       background-color: rgba(229, 232, 236, 0.5);
-      border-radius: 4px;
     }
 
     font-size: 0.75rem;
@@ -127,16 +113,5 @@ const classes = {
     align-items: center;
   `,
 };
-
-const directoryIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-    className={classes.icon}
-  >
-    <path d="M3.75 3A1.75 1.75 0 002 4.75v3.26a3.235 3.235 0 011.75-.51h12.5c.644 0 1.245.188 1.75.51V6.75A1.75 1.75 0 0016.25 5h-4.836a.25.25 0 01-.177-.073L9.823 3.513A1.75 1.75 0 008.586 3H3.75zM3.75 9A1.75 1.75 0 002 10.75v4.5c0 .966.784 1.75 1.75 1.75h12.5A1.75 1.75 0 0018 15.25v-4.5A1.75 1.75 0 0016.25 9H3.75z" />
-  </svg>
-);
 
 export default Directory;
