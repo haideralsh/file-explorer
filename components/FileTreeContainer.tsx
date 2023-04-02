@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { css } from '@emotion/css'
-
 import {
   FileTree as FileTreeType,
   fileTreeMachine,
@@ -42,7 +41,7 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
   if (fileTree.length === 0) return <h1>There's nothing to show</h1>;
 
   return (
-    <SelectedContext.Provider value={{ setSelected }}>
+    <SelectedContext.Provider value={{ selected, setSelected }}>
       <div style={{ display: "flex", flexWrap: "nowrap", minHeight: "100vh" }}>
         <div className={classes.container}>
           <div style={{
@@ -75,8 +74,9 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
             <>
               <pre
                 style={{
-                  fontFamily: `Menlo, Monaco, Consolas, monospace`,
-                  background: "rgba(220, 220, 230, 0.75)",
+                  fontFamily: `'JetBrains Mono', monospace`,
+                  background: "rgba(220, 220, 230, 0.25)",
+                  border: "1px solid rgba(220, 220, 230, 0.75)",
                   padding: "0px 4px",
                   marginRight: 4,
                   borderRadius: 4,

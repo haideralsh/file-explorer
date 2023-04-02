@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { FileTree } from "../models/fileTree";
 import Directory from "./Directory";
 import File from "./File";
@@ -14,6 +15,7 @@ const FileTree: React.FC<FileTreeProps> = ({ files, send, state, level }) => {
         if (files)
           return (
             <Directory
+              id={useId()}
               key={name}
               name={name}
               files={files}
@@ -23,7 +25,7 @@ const FileTree: React.FC<FileTreeProps> = ({ files, send, state, level }) => {
             />
           );
 
-        return <File key={name} name={name} level={level + 1} />;
+        return <File id={useId()} key={name} name={name} level={level + 1} />;
       })}
     </ul>
   );

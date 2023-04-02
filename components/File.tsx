@@ -1,54 +1,52 @@
 import { useSelectedContext } from "./SelectedContext";
-import { css } from '@emotion/css'
 import { FileIcon } from "../icons";
+import styled from "@emotion/styled";
 
 export type FileProps = {
   name: string;
-  [key: string]: any;
+  level: number;
+  id: string
 };
 
-const File: React.FC<FileProps> = ({ name, level }) => {
-  const { setSelected } = useSelectedContext();
+const FileName = styled.span<{ selected: boolean; level: number }>`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  line-height: 20px;
+  background-color: ${props => props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
+  padding-left: ${props => props.level * 8 + 18}px;
+
+  font-size: 0.75rem;
+
+  color: #333333;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(229, 232, 236, 0.5);
+  }
+`
+
+const File: React.FC<FileProps> = ({ id, name, level }) => {
+  const { selected, setSelected } = useSelectedContext();
+
+  function handleClick() {
+    setSelected({ id, name, type: "file" })
+  }
 
   return (
-    <span
+    <FileName
+      selected={selected?.id === id}
+      level={level}
       role="button"
-      style={{ paddingLeft: `${level * 8 + 18}px` }}
-      onClick={() => setSelected({ name, type: "file" })}
-      className={classes.fileName}
+      onClick={handleClick}
+
     >
       <FileIcon />
       {name}
-    </span>
+    </FileName>
   );
-};
-
-const classes = {
-  icon: css`
-    width: 1rem;
-    height: 1rem;
-    color: #a5a6a8;
-  `,
-
-  fileName: css`
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    line-height: 20px;
-
-    font-size: 0.75rem;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-    color: #333333;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgba(229, 232, 236, 0.5);
-    }
-  `,
 };
 
 export default File;

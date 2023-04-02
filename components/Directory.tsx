@@ -3,7 +3,8 @@ import { css } from '@emotion/css'
 import FileTree from "./FileTree";
 import type { FileTree as FileTreeType } from "../models/fileTree";
 import { useSelectedContext } from "./SelectedContext";
-import { DirectoryIcon, TriangleDown, TriangleRight } from "../icons";
+import styled from "@emotion/styled";
+import { DirectoryOpenIcon, DirectoryClosedIcon, TriangleDown, TriangleRight } from "../icons";
 
 export type DirectoryProps = {
   name: string;
@@ -12,6 +13,7 @@ export type DirectoryProps = {
 };
 
 const Directory: React.FC<DirectoryProps> = ({
+  id,
   name,
   files,
   state,
@@ -19,11 +21,11 @@ const Directory: React.FC<DirectoryProps> = ({
   level,
 }) => {
   const [showChildren, setShowChildren] = useState(false);
-  const { setSelected } = useSelectedContext();
+  const { selected, setSelected } = useSelectedContext();
 
   function handleClick() {
     toggleShowChildren();
-    setSelected({ name, type: "directory" });
+    setSelected({ id, name, type: "directory" });
   }
 
   function toggleShowChildren() {
@@ -56,16 +58,13 @@ const Directory: React.FC<DirectoryProps> = ({
         role="treeitem"
         onClick={handleClick}
       >
-        <span
-          style={{ paddingLeft: `${level * 8}px` }}
-          className={classes.directoryName}
-        >
+        <DirectoryName level={level} selected={selected?.id === id}>
           {showChildren ? <TriangleDown /> : <TriangleRight />}
           <span className={classes.directoryWrapper}>
-            <DirectoryIcon />
+            {showChildren ? <DirectoryOpenIcon /> : <DirectoryClosedIcon />}
             {name}
           </span>
-        </span>
+        </DirectoryName>
       </li>
       {showChildren && (
         <li>
@@ -81,29 +80,31 @@ const Directory: React.FC<DirectoryProps> = ({
   );
 };
 
+const DirectoryName = styled.span<{ selected: boolean; level: number }>`
+  cursor: pointer;
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  line-height: 20px;
+  background-color: ${props => props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
+  padding-left: ${props => props.level * 8 + 18}px;
+
+  &:hover {
+    background-color: rgba(229, 232, 236, 0.5);
+  }
+
+  font-size: 0.75rem;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  color: #333333;
+`
+
 const classes = {
   indentation: css`
     margin-left: 2rem;
-  `,
-
-  directoryName: css`
-    cursor: pointer;
-    display: flex;
-    gap: 0.2rem;
-    align-items: center;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    line-height: 20px;
-
-    &:hover {
-      background-color: rgba(229, 232, 236, 0.5);
-    }
-
-    font-size: 0.75rem;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-    color: #333333;
   `,
 
   directoryWrapper: css`
