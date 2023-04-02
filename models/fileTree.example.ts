@@ -1,141 +1,101 @@
 export default [
   {
-    name: "src",
-    files: [
-      {
-        name: "index.js",
-      },
-      {
-        name: "components",
-        files: [
-          {
-            name: "Navigation",
-            files: [
-              {
-                name: "Sami",
-                files: [
-                  {
-                    name: "halawani.tsx",
-                  },
-                ],
-              },
-              {
-                name: "Rami",
-                files: [
-                  {
-                    name: "salamy.tsx",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
     name: "components",
     files: [
       {
-        name: "index.js",
+        name: "Controls.tsx",
       },
       {
-        name: "components",
+        name: "Directory.tsx",
+      },
+      {
+        name: "File.tsx",
+      },
+      {
+        name: "FileTree.tsx",
+      },
+      {
+        name: "FileTreeContainer.tsx",
+      },
+      {
+        name: "SearchInput.tsx",
+      },
+      {
+        name: "SelectedContext.ts",
+      },
+      {
+        name: "icons",
         files: [
           {
-            name: "Navigation",
-            files: [
-              {
-                name: "Sami",
-                files: [
-                  {
-                    name: "halawani.tsx",
-                  },
-                ],
-              },
-              {
-                name: "Rami",
-                files: [
-                  {
-                    name: "salamy.tsx",
-                  },
-                ],
-              },
-            ],
+            name: "index.tsx",
           },
         ],
       },
     ],
   },
   {
-    name: "stuff",
+    name: "models",
     files: [
       {
-        name: "index.js",
+        name: "fileTree.example.ts",
       },
       {
-        name: "components",
-        files: [
-          {
-            name: "Navigation",
-            files: [
-              {
-                name: "Sami",
-                files: [
-                  {
-                    name: "halawani.tsx",
-                  },
-                ],
-              },
-              {
-                name: "Rami",
-                files: [
-                  {
-                    name: "salamy.tsx",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+        name: "fileTree.test.ts",
+      },
+      {
+        name: "fileTree.ts",
       },
     ],
   },
   {
-    name: "things",
+    name: "pages",
     files: [
       {
-        name: "index.js",
+        name: "_app.tsx",
       },
       {
-        name: "components",
-        files: [
-          {
-            name: "Navigation",
-            files: [
-              {
-                name: "Sami",
-                files: [
-                  {
-                    name: "halawani.tsx",
-                  },
-                ],
-              },
-              {
-                name: "Rami",
-                files: [
-                  {
-                    name: "salamy.tsx",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+        name: "_document.tsx",
+      },
+      {
+        name: "index.tsx",
+      },
+    ],
+  },
+  {
+    name: "public",
+    files: [
+      {
+        name: "favicon.ico",
+      },
+    ],
+  },
+  {
+    name: "styles",
+    files: [
+      {
+        name: "globals.css",
+      },
+      {
+        name: "Home.module.css",
       },
     ],
   },
   {
     name: ".gitignore",
+  },
+  {
+    name: "next-env.d.ts",
+  },
+  {
+    name: "next.config.js",
+  },
+  {
+    name: "package.json",
+  },
+  {
+    name: "package-lock.json",
+  },
+  {
+    name: "README.md",
   },
 ];
