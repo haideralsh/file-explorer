@@ -39,6 +39,11 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
+  function focus() {
+    setFocused(true)
+    inputRef?.current?.focus();
+  }
+
   useEffect(() => {
     function handleSlashPress(e: KeyboardEvent) {
       if (e.key !== "/" || e.ctrlKey || e.metaKey) return;
@@ -61,6 +66,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
 
     <SearchInputWrapper
       focused={focused}
+      onClick={focus}
     >
       <SearchIcon />
       <SearchTextInput
