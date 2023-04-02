@@ -1,11 +1,11 @@
 import { useSelectedContext } from "./SelectedContext";
 import { FileIcon } from "../icons";
 import styled from "@emotion/styled";
+import { useId } from "react";
 
 export type FileProps = {
   name: string;
   level: number;
-  id: string
 };
 
 const FileName = styled.span<{ selected: boolean; level: number }>`
@@ -28,7 +28,8 @@ const FileName = styled.span<{ selected: boolean; level: number }>`
   }
 `
 
-const File: React.FC<FileProps> = ({ id, name, level }) => {
+const File: React.FC<FileProps> = ({ name, level }) => {
+  const id = useId()
   const { selected, setSelected } = useSelectedContext();
 
   function handleClick() {

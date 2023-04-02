@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { css } from '@emotion/css'
 import FileTree from "./FileTree";
 import type { FileTree as FileTreeType } from "../models/fileTree";
@@ -13,13 +13,13 @@ export type DirectoryProps = {
 };
 
 const Directory: React.FC<DirectoryProps> = ({
-  id,
   name,
   files,
   state,
   send,
   level,
 }) => {
+  const id = useId()
   const [showChildren, setShowChildren] = useState(false);
   const { selected, setSelected } = useSelectedContext();
 
