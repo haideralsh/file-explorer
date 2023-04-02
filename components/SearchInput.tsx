@@ -8,28 +8,29 @@ const SearchTextInput = styled.input`
   border: none;
   outline: none;
   font-size: 12px;
-  `
+`;
 
 const ShortcutIndicator = styled.span`
-    font-size: 12px;
-    color: #747C84;
-    background-color: rgba(220, 220, 230, 0.75);
-    padding: 2px 6px;
-    border-radius: 3px;
-    flex-shrink: 0;
-`
+  font-size: 12px;
+  color: #747c84;
+  background-color: rgba(220, 220, 230, 0.75);
+  padding: 2px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+`;
 
 const SearchInputWrapper = styled.div<{ focused: boolean }>`
-    display: flex;
-    border: ${props => props.focused ? "1px solid #166CD7" : "1px solid #dce1e6"};
-    align-items: center;
-    justify-content: space-between;
-    gap: 5px;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin: 0px 15px;
-    flex-grow: 1;
-`
+  display: flex;
+  border: ${(props) =>
+    props.focused ? "1px solid #166CD7" : "1px solid #dce1e6"};
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0px 15px;
+  flex-grow: 1;
+`;
 
 type SearchInputProps = {
   onSearch: (query: string) => void;
@@ -40,7 +41,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   function focus() {
-    setFocused(true)
+    setFocused(true);
     inputRef?.current?.focus();
   }
 
@@ -63,11 +64,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
   }, []);
 
   return (
-
-    <SearchInputWrapper
-      focused={focused}
-      onClick={focus}
-    >
+    <SearchInputWrapper focused={focused} onClick={focus}>
       <SearchIcon />
       <SearchTextInput
         onFocus={() => setFocused(true)}

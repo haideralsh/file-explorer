@@ -1,11 +1,11 @@
-import styled from '@emotion/styled'
-import { CollapseIcon, ExpandIcon } from '../icons';
+import styled from "@emotion/styled";
+import { CollapseIcon, ExpandIcon } from "../icons";
 
 const ControlsWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 5px 15px;
-`
+`;
 
 const Button = styled.button`
   display: flex;
@@ -25,7 +25,7 @@ const Button = styled.button`
 
 type ControlsProps = {
   onExpandAll: () => void;
-  onCollapseAll: () => void
+  onCollapseAll: () => void;
 };
 
 const Controls: React.FC<ControlsProps> = ({ onExpandAll, onCollapseAll }) => {
@@ -40,7 +40,7 @@ const Controls: React.FC<ControlsProps> = ({ onExpandAll, onCollapseAll }) => {
         Collapse all
       </Button>
     </ControlsWrapper>
-  )
-}
+  );
+};
 
 export default Controls;

@@ -1,16 +1,15 @@
-
 import { FileTree } from "../models/fileTree";
 import Directory from "./Directory";
 import File from "./File";
 
 export type FileTreeProps = {
   files: FileTree;
-  [key: string]: any;
+  state: { value: string };
+  send: (k: string) => void;
+  level: number;
 };
 
 const FileTree: React.FC<FileTreeProps> = ({ files, send, state, level }) => {
-
-
   return (
     <ul style={{ margin: 0, listStyleType: "none", padding: 0 }}>
       {files.map(({ name, files }) => {

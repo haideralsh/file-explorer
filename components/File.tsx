@@ -15,8 +15,9 @@ const FileName = styled.span<{ selected: boolean; level: number }>`
   padding-top: 2px;
   padding-bottom: 2px;
   line-height: 20px;
-  background-color: ${props => props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
-  padding-left: ${props => props.level * 8 + 18}px;
+  background-color: ${(props) =>
+    props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
+  padding-left: ${(props) => props.level * 8 + 18}px;
 
   font-size: 0.75rem;
 
@@ -26,14 +27,14 @@ const FileName = styled.span<{ selected: boolean; level: number }>`
   &:hover {
     background-color: rgba(229, 232, 236, 0.5);
   }
-`
+`;
 
 const File: React.FC<FileProps> = ({ name, level }) => {
-  const id = useId()
+  const id = useId();
   const { selected, setSelected } = useSelectedContext();
 
   function handleClick() {
-    setSelected({ id, name, type: "file" })
+    setSelected({ id, name, type: "file" });
   }
 
   return (
@@ -42,7 +43,6 @@ const File: React.FC<FileProps> = ({ name, level }) => {
       level={level}
       role="button"
       onClick={handleClick}
-
     >
       <FileIcon />
       {name}

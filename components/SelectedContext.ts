@@ -7,13 +7,13 @@ export type SelectedNode = {
 };
 
 type SelectedContextValue = {
-  selected: SelectedNode | null
+  selected: SelectedNode | null;
   setSelected: Dispatch<SetStateAction<SelectedNode | null>> | Function;
 };
 
 export const SelectedContext = createContext<SelectedContextValue>({
   selected: null,
-  setSelected: () => { },
+  setSelected: () => {},
 });
 
 export const useSelectedContext = () => useContext(SelectedContext);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { css } from '@emotion/css'
+import { css } from "@emotion/css";
 import {
   FileTree as FileTreeType,
   fileTreeMachine,
@@ -44,17 +44,26 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
     <SelectedContext.Provider value={{ selected, setSelected }}>
       <div style={{ display: "flex", flexWrap: "nowrap", minHeight: "100vh" }}>
         <div className={classes.container}>
-          <div style={{
-            display: "flex",
-            flexDirection: "column",
-            maxWidth: "288px",
-            gap: 5
-          }}>
-            <Controls onExpandAll={() => { send("EXPAND_ALL") }} onCollapseAll={() => { send("COLLAPSE_ALL") }} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              maxWidth: "288px",
+              gap: 5,
+            }}
+          >
+            <Controls
+              onExpandAll={() => {
+                send("EXPAND_ALL");
+              }}
+              onCollapseAll={() => {
+                send("COLLAPSE_ALL");
+              }}
+            />
             <SearchInput onSearch={handleSearch} />
           </div>
           <FileTree
-            state={state}
+            state={state as any}
             send={send}
             files={filteredFileTree}
             level={0}

@@ -1,15 +1,22 @@
 import { useEffect, useId, useState } from "react";
-import { css } from '@emotion/css'
+import { css } from "@emotion/css";
 import FileTree from "./FileTree";
 import type { FileTree as FileTreeType } from "../models/fileTree";
 import { useSelectedContext } from "./SelectedContext";
 import styled from "@emotion/styled";
-import { DirectoryOpenIcon, DirectoryClosedIcon, TriangleDown, TriangleRight } from "../icons";
+import {
+  DirectoryOpenIcon,
+  DirectoryClosedIcon,
+  TriangleDown,
+  TriangleRight,
+} from "../icons";
 
 export type DirectoryProps = {
   name: string;
   files: FileTreeType;
-  [key: string]: any;
+  state: { value: string };
+  send: (k: string) => void;
+  level: number;
 };
 
 const Directory: React.FC<DirectoryProps> = ({
@@ -19,7 +26,7 @@ const Directory: React.FC<DirectoryProps> = ({
   send,
   level,
 }) => {
-  const id = useId()
+  const id = useId();
   const [showChildren, setShowChildren] = useState(false);
   const { selected, setSelected } = useSelectedContext();
 
@@ -54,10 +61,7 @@ const Directory: React.FC<DirectoryProps> = ({
       aria-label="Files"
       style={{ margin: 0, listStyleType: "none", padding: 0 }}
     >
-      <li
-        role="treeitem"
-        onClick={handleClick}
-      >
+      <li role="treeitem" onClick={handleClick}>
         <DirectoryName level={level} selected={selected?.id === id}>
           {showChildren ? <TriangleDown /> : <TriangleRight />}
           <span className={classes.directoryWrapper}>
@@ -68,15 +72,10 @@ const Directory: React.FC<DirectoryProps> = ({
       </li>
       {showChildren && (
         <li>
-          <FileTree
-            files={files}
-            state={state}
-            send={send}
-            level={level + 1}
-          />
+          <FileTree files={files} state={state} send={send} level={level + 1} />
         </li>
       )}
-    </ul >
+    </ul>
   );
 };
 
@@ -88,8 +87,9 @@ const DirectoryName = styled.span<{ selected: boolean; level: number }>`
   padding-top: 2px;
   padding-bottom: 2px;
   line-height: 20px;
-  background-color: ${props => props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
-  padding-left: ${props => props.level * 8 + 18}px;
+  background-color: ${(props) =>
+    props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
+  padding-left: ${(props) => props.level * 8 + 18}px;
 
   &:hover {
     background-color: rgba(229, 232, 236, 0.5);
@@ -100,7 +100,7 @@ const DirectoryName = styled.span<{ selected: boolean; level: number }>`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   color: #333333;
-`
+`;
 
 const classes = {
   indentation: css`
