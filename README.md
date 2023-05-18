@@ -2,7 +2,6 @@
 
 > A file tree component
 
-
 Built using:
 - React
 - TypeScript
