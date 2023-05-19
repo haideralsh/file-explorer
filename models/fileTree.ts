@@ -28,6 +28,13 @@ export function find(files: FileTree, query: string): FileTree {
   return result;
 }
 
+export type FileTreeEvent =
+  | "EXPAND_ALL"
+  | "COLLAPSE_ALL"
+  | "EXPAND_NODE"
+  | "SEARCH"
+  | "COLLAPSE_NODE";
+
 export const fileTreeMachine = createMachine({
   id: "fileTree",
   initial: "collapsed",
