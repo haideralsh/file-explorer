@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
-import { SearchIcon } from "../icons";
+import { SearchIcon } from "../theme/icons";
 
 const SearchTextInput = styled.input`
   flex-grow: 1;

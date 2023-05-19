@@ -1,7 +1,9 @@
 import { useEffect, useId, useState } from "react";
-import { css } from "@emotion/css";
-import FileTree from "./FileTree";
-import type { FileTree as FileTreeType } from "../models/fileTree";
+import FileTree, { FileList } from "./FileTree";
+import type {
+  FileTree as FileTreeType,
+  FileTreeEvent,
+} from "../models/fileTree";
 import { useSelectedContext } from "./SelectedContext";
 import styled from "@emotion/styled";
 import {
@@ -9,13 +11,15 @@ import {
   DirectoryClosedIcon,
   TriangleDown,
   TriangleRight,
-} from "../icons";
+} from "../theme/icons";
+import colors from "../theme/colors";
+import fonts from "../theme/fonts";
 
 export type DirectoryProps = {
   name: string;
   files: FileTreeType;
   state: { value: string };
-  send: (k: string) => void;
+  send: (k: FileTreeEvent) => void;
   level: number;
 };
 
@@ -56,18 +60,14 @@ const Directory: React.FC<DirectoryProps> = ({
   }, [state.value]);
 
   return (
-    <ul
-      role="tree"
-      aria-label="Files"
-      style={{ margin: 0, listStyleType: "none", padding: 0 }}
-    >
+    <FileList role="tree" aria-label="Files">
       <li role="treeitem" onClick={handleClick}>
         <DirectoryName level={level} selected={selected?.id === id}>
           {showChildren ? <TriangleDown /> : <TriangleRight />}
-          <span className={classes.directoryWrapper}>
+          <DirectoryNameWrapper>
             {showChildren ? <DirectoryOpenIcon /> : <DirectoryClosedIcon />}
             {name}
-          </span>
+          </DirectoryNameWrapper>
         </DirectoryName>
       </li>
       {showChildren && (
@@ -75,7 +75,7 @@ const Directory: React.FC<DirectoryProps> = ({
           <FileTree files={files} state={state} send={send} level={level + 1} />
         </li>
       )}
-    </ul>
+    </FileList>
   );
 };
 
@@ -88,31 +88,24 @@ const DirectoryName = styled.span<{ selected: boolean; level: number }>`
   padding-bottom: 2px;
   line-height: 20px;
   background-color: ${(props) =>
-    props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
+    props.selected ? colors.lightGrey2 : colors.transparent};
   padding-left: ${(props) => props.level * 8 + 18}px;
 
   &:hover {
-    background-color: rgba(229, 232, 236, 0.5);
+    background-color: ${colors.lightGrey2};
   }
 
   font-size: 0.75rem;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: ${fonts.default};
 
-  color: #333333;
+  color: ${colors.grey};
 `;
 
-const classes = {
-  indentation: css`
-    margin-left: 2rem;
-  `,
-
-  directoryWrapper: css`
-    cursor: pointer;
-    display: flex;
-    gap: 0.2rem;
-    align-items: center;
-  `,
-};
+const DirectoryNameWrapper = styled.span`
+  cursor: pointer;
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+`;
 
 export default Directory;

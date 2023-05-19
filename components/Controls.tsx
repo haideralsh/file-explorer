@@ -1,5 +1,26 @@
 import styled from "@emotion/styled";
-import { CollapseIcon, ExpandIcon } from "../icons";
+import { CollapseIcon, ExpandIcon } from "../theme/icons";
+import colors from "../theme/colors";
+
+type ControlsProps = {
+	onExpandAll: () => void;
+	onCollapseAll: () => void;
+};
+
+const Controls: React.FC<ControlsProps> = ({ onExpandAll, onCollapseAll }) => {
+	return (
+		<ControlsWrapper>
+			<Button onClick={onExpandAll}>
+				<ExpandIcon />
+				Expand all
+			</Button>
+			<Button onClick={onCollapseAll}>
+				<CollapseIcon />
+				Collapse all
+			</Button>
+		</ControlsWrapper>
+	);
+};
 
 const ControlsWrapper = styled.div`
   display: flex;
@@ -16,31 +37,11 @@ const Button = styled.button`
   border-radius: 4px;
 
   font-size: 11px;
-  background-color: #ffffff;
+  background-color: ${colors.white};
 
   &:hover {
-    background-color: rgba(220, 220, 230, 0.75);
+    background-color: ${colors.lightGrey};
   }
 `;
-
-type ControlsProps = {
-  onExpandAll: () => void;
-  onCollapseAll: () => void;
-};
-
-const Controls: React.FC<ControlsProps> = ({ onExpandAll, onCollapseAll }) => {
-  return (
-    <ControlsWrapper>
-      <Button onClick={onExpandAll}>
-        <ExpandIcon />
-        Expand all
-      </Button>
-      <Button onClick={onCollapseAll}>
-        <CollapseIcon />
-        Collapse all
-      </Button>
-    </ControlsWrapper>
-  );
-};
 
 export default Controls;

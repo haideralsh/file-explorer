@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { css } from "@emotion/css";
 import {
   FileTree as FileTreeType,
   fileTreeMachine,
@@ -10,17 +9,7 @@ import { useMachine } from "@xstate/react";
 import SearchInput from "./SearchInput";
 import { SelectedContext, SelectedNode } from "./SelectedContext";
 import Controls from "./Controls";
-
-const classes = {
-  container: css`
-    display: flex;
-    flex-direction: column;
-    max-width: 288px;
-    gap: 5px;
-    border-right: 1px solid;
-    border-color: rgba(220, 220, 230, 0.75);
-  `,
-};
+import styled from "@emotion/styled";
 
 type FileTreeContainerProps = {
   fileTree: FileTreeType;
@@ -43,7 +32,7 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
   return (
     <SelectedContext.Provider value={{ selected, setSelected }}>
       <div style={{ display: "flex", flexWrap: "nowrap", minHeight: "100vh" }}>
-        <div className={classes.container}>
+        <Container>
           <div
             style={{
               display: "flex",
@@ -68,7 +57,7 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
             files={filteredFileTree}
             level={0}
           />
-        </div>
+        </Container>
         <div
           style={{
             color: "#333333",
@@ -81,18 +70,7 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
         >
           {selected ? (
             <>
-              <pre
-                style={{
-                  fontFamily: `'JetBrains Mono', monospace`,
-                  background: "rgba(220, 220, 230, 0.25)",
-                  border: "1px solid rgba(220, 220, 230, 0.75)",
-                  padding: "0px 4px",
-                  marginRight: 4,
-                  borderRadius: 4,
-                }}
-              >
-                {selected.name}
-              </pre>
+              <DisplayedFileName>{selected.name}</DisplayedFileName>
               {selected.type} currently selected
             </>
           ) : (
@@ -103,5 +81,23 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
     </SelectedContext.Provider>
   );
 };
+
+const DisplayedFileName = styled.pre`
+		font-family: 'JetBrains Mono', monospace;
+		background: rgba(220, 220, 230, 0.25);
+		border: 1px solid rgba(220, 220, 230, 0.75);
+		padding: 0px 4px;
+		margin-right: 4px;
+		border-radius: 4px;
+  `;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 288px;
+  gap: 5px;
+  border-right: 1px solid;
+  border-color: rgba(220, 220, 230, 0.75);
+`;
 
 export default FileTreeContainer;

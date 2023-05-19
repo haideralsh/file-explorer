@@ -1,17 +1,18 @@
-import { FileTree } from "../models/fileTree";
+import styled from "@emotion/styled";
+import { FileTree, FileTreeEvent } from "../models/fileTree";
 import Directory from "./Directory";
 import File from "./File";
 
 export type FileTreeProps = {
   files: FileTree;
   state: { value: string };
-  send: (k: string) => void;
+  send: (k: FileTreeEvent) => void;
   level: number;
 };
 
 const FileTree: React.FC<FileTreeProps> = ({ files, send, state, level }) => {
   return (
-    <ul style={{ margin: 0, listStyleType: "none", padding: 0 }}>
+    <FileList role="tree" aria-label="Files">
       {files.map(({ name, files }) => {
         if (files)
           return (
@@ -27,8 +28,14 @@ const FileTree: React.FC<FileTreeProps> = ({ files, send, state, level }) => {
 
         return <File key={name} name={name} level={level + 1} />;
       })}
-    </ul>
+    </FileList>
   );
 };
+
+export const FileList = styled.ul`
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+`;
 
 export default FileTree;

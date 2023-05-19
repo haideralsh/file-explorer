@@ -1,33 +1,13 @@
 import { useSelectedContext } from "./SelectedContext";
-import { FileIcon } from "../icons";
+import { FileIcon } from "../theme/icons";
 import styled from "@emotion/styled";
 import { useId } from "react";
+import colors from "../theme/colors";
 
 export type FileProps = {
   name: string;
   level: number;
 };
-
-const FileName = styled.span<{ selected: boolean; level: number }>`
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  line-height: 20px;
-  background-color: ${(props) =>
-    props.selected ? "rgba(229, 232, 236, 0.5)" : "transparent"};
-  padding-left: ${(props) => props.level * 8 + 18}px;
-
-  font-size: 0.75rem;
-
-  color: #333333;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(229, 232, 236, 0.5);
-  }
-`;
 
 const File: React.FC<FileProps> = ({ name, level }) => {
   const id = useId();
@@ -49,5 +29,26 @@ const File: React.FC<FileProps> = ({ name, level }) => {
     </FileName>
   );
 };
+
+const FileName = styled.span<{ selected: boolean; level: number }>`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  line-height: 20px;
+  background-color: ${(props) =>
+    props.selected ? colors.lightGrey2 : colors.transparent};
+  padding-left: ${(props) => props.level * 8 + 18}px;
+
+  font-size: 0.75rem;
+
+  color: ${colors.grey};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.lightGrey2};
+  }
+`;
 
 export default File;
