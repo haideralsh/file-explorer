@@ -66,7 +66,6 @@ const Directory: React.FC<DirectoryProps> = ({
           <motion.span
             animate={{ rotate: showChildren ? 90 : 0 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className="flex"
           >
             <TriangleRight />
           </motion.span>
