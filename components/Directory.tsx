@@ -100,6 +100,7 @@ const Directory: React.FC<DirectoryProps> = ({
 
 const DirectoryName = styled.span<{ selected: boolean; level: number }>`
   cursor: pointer;
+  user-select: none;
   display: flex;
   gap: 0.2rem;
   align-items: center;

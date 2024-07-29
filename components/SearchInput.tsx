@@ -21,6 +21,7 @@ const ShortcutIndicator = styled.span`
 
 const SearchInputWrapper = styled.div<{ focused: boolean }>`
   display: flex;
+  user-select: none;
   border: ${(props) =>
     props.focused ? "1px solid #166CD7" : "1px solid #dce1e6"};
   align-items: center;

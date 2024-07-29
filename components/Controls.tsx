@@ -30,6 +30,7 @@ const ControlsWrapper = styled.div`
 
 const Button = styled.button`
   display: flex;
+  user-select: none;
   align-items: center;
   border: none;
   gap: 2px;

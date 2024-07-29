@@ -45,6 +45,7 @@ const FileName = styled.span<{ selected: boolean; level: number }>`
 
   color: ${colors.grey};
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     background-color: ${colors.lightGrey2};
