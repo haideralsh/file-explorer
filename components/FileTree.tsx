@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import { FileTree, FileTreeEvent } from "../models/fileTree";
 import Directory from "./Directory";
 import File from "./File";

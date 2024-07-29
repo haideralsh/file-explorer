@@ -3,9 +3,10 @@
 > A file tree component
 
 Built using:
-- React
-- TypeScript
-- XState
-- Emotion styled components
-- HeroIcons
-- Radix Icons
+
+- React (rendering)
+- TypeScript (type checking)
+- XState (state management)
+- Emotion styled components (styling)
+- HeroIcons & Radix Icons (icons)
+- Framer Motion (animations)

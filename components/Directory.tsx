@@ -9,11 +9,11 @@ import styled from "@emotion/styled";
 import {
   DirectoryOpenIcon,
   DirectoryClosedIcon,
-  TriangleDown,
   TriangleRight,
 } from "../theme/icons";
 import colors from "../theme/colors";
 import fonts from "../theme/fonts";
+import { AnimatePresence, motion } from "framer-motion";
 
 export type DirectoryProps = {
   name: string;
@@ -63,18 +63,37 @@ const Directory: React.FC<DirectoryProps> = ({
     <FileList role="tree" aria-label="Files">
       <li role="treeitem" onClick={handleClick}>
         <DirectoryName level={level} selected={selected?.id === id}>
-          {showChildren ? <TriangleDown /> : <TriangleRight />}
+          <motion.span
+            animate={{ rotate: showChildren ? 90 : 0 }}
+            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+            className="flex"
+          >
+            <TriangleRight />
+          </motion.span>
           <DirectoryNameWrapper>
             {showChildren ? <DirectoryOpenIcon /> : <DirectoryClosedIcon />}
             {name}
           </DirectoryNameWrapper>
         </DirectoryName>
       </li>
-      {showChildren && (
-        <li>
-          <FileTree files={files} state={state} send={send} level={level + 1} />
-        </li>
-      )}
+      <AnimatePresence>
+        {showChildren && (
+          <motion.li
+            style={{ overflow: "hidden" }}
+            initial={{ height: 0 }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
+            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+          >
+            <FileTree
+              files={files}
+              state={state}
+              send={send}
+              level={level + 1}
+            />
+          </motion.li>
+        )}
+      </AnimatePresence>
     </FileList>
   );
 };
