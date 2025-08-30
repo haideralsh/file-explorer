@@ -51,23 +51,18 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
             />
             <SearchInput onSearch={handleSearch} />
           </div>
-          <FileTree
-            state={state as any}
-            send={send}
-            files={filteredFileTree}
-            level={0}
-          />
+          {filteredFileTree.length === 0 ? (
+            <NoResultsMessage>No results found.</NoResultsMessage>
+          ) : (
+            <FileTree
+              state={state as any}
+              send={send}
+              files={filteredFileTree}
+              level={0}
+            />
+          )}
         </Container>
-        <div
-          style={{
-            color: "#333333",
-            display: "flex",
-            alignItems: "center",
-            fontSize: "0.75rem",
-            flexGrow: "1",
-            justifyContent: "center",
-          }}
-        >
+        <NothingSelectedMessage>
           {selected ? (
             <>
               <DisplayedFileName>{selected.name}</DisplayedFileName>
@@ -76,11 +71,25 @@ export const FileTreeContainer: React.FC<FileTreeContainerProps> = ({
           ) : (
             "Nothing currently selected"
           )}
-        </div>
+        </NothingSelectedMessage>
       </div>
     </SelectedContext.Provider>
   );
 };
+
+const NoResultsMessage = styled.span`
+  color: #333333;
+  display: flex;
+  font-size: 0.75rem;
+  flex-grow: 1;
+  justify-content: left;
+  margin: 5px 15px;
+`;
+
+const NothingSelectedMessage = styled(NoResultsMessage)`
+  align-items: center;
+  justify-content: center;
+`;
 
 const DisplayedFileName = styled.pre`
 		font-family: 'JetBrains Mono', monospace;
