@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
-import { motion } from "framer-motion";
-import { FileTree, FileTreeEvent } from "../models/fileTree";
+import type {
+  FileTree as FileTreeType,
+  FileTreeEvent,
+} from "../models/fileTree";
 import Directory from "./Directory";
 import File from "./File";
 
 export type FileTreeProps = {
-  files: FileTree;
+  files: FileTreeType;
   state: { value: string };
   send: (k: FileTreeEvent) => void;
   level: number;
